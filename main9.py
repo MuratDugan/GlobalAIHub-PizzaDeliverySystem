@@ -4,6 +4,8 @@ from datetime import datetime
 #kütüphaneleri ekliyoruz
 
 
+#*****************************************************************************************************
+#PİZZALAR
 
 #üst sınıf oluşturuyoruz.
 class pizza:
@@ -32,6 +34,8 @@ class queen(pizza):
         super().__init__("Queen Pizza", 40,boyut)
 
 
+#*****************************************************************************************************
+#EKSTRALAR
 
 class ekstra:
     def __init__(self,sosAdi,fiyat): #pizzanın ekstra seçeneklerinin üst sınıfını oluşturuyoruz. pizza sınıfına yaptığımız uygulamayı burada da gerçekleştiriyoruz.
@@ -43,6 +47,26 @@ class ekstra:
 
     def get_fiyat(self):
         return self.fiyat
+
+
+
+class ekstraMisir(ekstra):
+    def __init__(self):
+        super().__init__("Ekstra Mısır",4.0)
+
+class ekstraSogan(ekstra):
+    def __init__(self):
+        super().__init__("Eksta Soğan", 6.0)
+
+
+class ekstraEt(ekstra):
+    def __init__(self):
+        super().__init__("Ekstra Dana Eti", 16.0)
+
+class keciPeynir(ekstra):
+    def __init__(self):
+        super().__init__("Ekstra Keçi Peyniri", 6.0)
+
 
 
 class zeytin(ekstra):
@@ -69,6 +93,10 @@ class decorator: #pizzaları tanımlarken kod karşmaşası yaşadığım için 
     def get_fiyat(self): #pizza üst sınıfından fiyatını çağıracak.
         return self.pizza.get_fiyat()
 
+
+
+#*****************************************************************************************************
+# boyut
 
 class boyutDecorator(decorator):
     def __init__(self,pizza,boyut):#pizzanın boyutunu pizzanın isminine seçilen boyut eklenecek ve fiyat değerini atayacak.
@@ -106,7 +134,7 @@ def main():
     print("Lütfen Aşağıdan pizzanızı seçiniz (1-3): ")
     print("1. Sucuklu Pizza")
     print("2. Vejeteryan Pizza")
-    print("3. Özel Queen Pizza")
+    print("3. Özel Queen Pizza")#pizzastation santral :D
     secilenPizza_secilebilir = [1,2,3]        #listedeki seçenekler dışında seçenek yapıldığında sonsuz bir şekilde izin verilen sayıyı girene kadar soruyu tekrar soran bir while döngüsü.
     while True:
         secilenPizza = int(input("Pizza seçimi: "))
@@ -117,27 +145,31 @@ def main():
             print("3. Büyük")
             break
         else:
-            print("Lütfen listeden doğru seçim yapınız.")
+            print("Lütfen listeden doğru pizza seçim yapınız.")
 
     pizzaBoyu_secilebilir = [1,2,3]           #aynı şekilde yine seçenek kısıtlaması
     while True:
         pizzaBoyu = int(input("boyutu seçin(1-3): "))
         if pizzaBoyu in pizzaBoyu_secilebilir:
-            print("Ekstranızı Seçiniz:")
+            print("Ekstranızı Seçiniz(sadece bir çeşit ekstra hakkınız var) : ")
             print("1. Zeytin")
             print("2. Mantar")
-            print("3. Ekstra İstemiyorum.")
+            print("3. Keçi Peyniri")
+            print("4. Et")
+            print("5. Soğan")
+            print("6. Mısır")
+            print("7. Ekstra İstemiyorum.")
             break
         else:
-            print("Lütfen listeden doğru seçim yapınız: ")
+            print("Lütfen listeden doğru boy seçim yapınız: ")
 
-    verilebilir_cevap = [1,2,3]
+    verilebilir_cevap = [1,2,3,4,5,6,7]
     while True:
         ekstraSecimi = int(input("Ekstra Seçiniz: "))
         if ekstraSecimi in verilebilir_cevap:
             break
         else:
-            print("Lütfen listeden doğru seçimi yapınız: ")
+            print("Lütfen listeden doğru ekstra seçimi yapınız: ")
 
     if secilenPizza == 1:
         pizza = sucukPizza(pizzaBoyu)
@@ -163,6 +195,14 @@ def main():
     elif ekstraSecimi == 2:
         pizza = ekstraDecorator(pizza, mantar())
     elif ekstraSecimi == 3:
+        pizza = ekstraDecorator(pizza, keciPeynir())
+    elif ekstraSecimi == 4:
+        pizza = ekstraDecorator(pizza, ekstraEt())
+    elif ekstraSecimi == 5:
+        pizza = ekstraDecorator(pizza, ekstraSogan())
+    elif ekstraSecimi == 6:
+        pizza = ekstraDecorator(pizza, ekstraMisir())
+    elif ekstraSecimi == 7:
         pizza = ekstraDecorator(pizza, ekstraSecimYok())
 
     pizza = boyutDecorator(pizza, pizzaBoyu)
