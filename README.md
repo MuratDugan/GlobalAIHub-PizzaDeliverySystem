@@ -4,3 +4,9 @@ Kaynaklar olarak: w3schools.com, GlobalAIHUB Introduction to Python,
 Udemy derslerim, hata kodları için stackoverflow ve openai, terimler için python-istihza.yazbel.com
 
 csv dosyasında örnek çıktılar bulunmakta.
+
+
+menüdeki ürün pizzastation :)
+
+muratkaya665@gmail.com
+murat@muratdugan.com.tr
